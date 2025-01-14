@@ -16,7 +16,7 @@ public class AuthController {
     private final AppUserSrv appUserSrv;
 
     @PostMapping("/register")
-    public ResponseEntity<String> register(@RequestBody RegisterRequest registerRequest) {
+    public ResponseEntity<String> register(@RequestBody RegisterReq registerRequest) {
         appUserSrv.registerUser(
                 registerRequest.getUsername(),
                 registerRequest.getPassword(),
@@ -26,11 +26,11 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<AuthRes> login(@RequestBody LoginReq loginRequest) {
         String token = appUserSrv.authenticateUser(
                 loginRequest.getUsername(),
                 loginRequest.getPassword()
         );
-        return ResponseEntity.ok(new AuthResponse(token));
+        return ResponseEntity.ok(new AuthRes(token));
     }
 }
